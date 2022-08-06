@@ -1,0 +1,128 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img
+          src="/images/flat-design-running-shoes-icon-vector-illustration-eps-vector_csp39359247.webp"
+          alt=""
+          width="40"
+          height="40"
+        />
+      </a>
+      <a class="navbar-brand" href="/">ShoeCart</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        {{! <span class="navbar-toggler-icon"></span> }}
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        </ul>
+        <form class="">
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {{#if user}}
+                {{user.Name}}
+              {{else}}
+                Account
+              {{/if}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="z-index: 1021;">
+              {{#if user}}
+                <a class="dropdown-item" href="/logout">Logout</a>
+              {{else}}
+                <a class="dropdown-item" href="/login">Login</a>
+                <a class="dropdown-item" href="/signup">SignUp</a>
+              {{/if}}
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
+  {{#if user}}
+   <div class="header-secondnav sticky-top">
+    <nav
+      class="navbar  navbar-expand-lg navbar-light bg-light sticky-top"
+      style="height: 4rem;" 
+    >
+      <div class="container-fluid ">
+        <a class="navbar-brand" href="#"></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"aria-expanded="false" aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown"  >
+          <ul class="navbar-nav position-absolute end-0 bg-light ps-4" style="z-index:1;" >
+            
+
+
+            
+           
+    
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            {{#each Category}}
+            <li class="ms-2 "><a class="dropdown-item text-white" href="/category?id={{this._id}}&&Category={{this.Category}}">{{this.Category}}</a></li>
+           {{/each}}
+          </ul>
+        </li>
+      
+   
+
+
+
+
+            <li class="nav-item">
+              <a class="nav-link active" href="/cart">Cart
+                <span
+                  class="position-absolute top-6 start-100 translate-middle badge rounded-pill bg-danger"
+                  id="cart-count"
+                >
+                  {{cartCount}}
+                  {{! <span class="visually-hidden">unread messages</span> }}
+                </span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/orders">Order</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/offers">Offers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/profile-address">User</a>
+            </li>
+            {{!-- <li class="nav-item">
+             <input id="searchbar" onkeyup="search_product()" name="search" type="text" placeholder="Search.." class="mt-3 me-1 rounded" />
+            </li> --}}
+
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    </div>
+  {{/if}}
+</header>

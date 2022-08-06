@@ -1,0 +1,127 @@
+<style>
+  
+
+.list-wrapper {
+	padding: 15px;
+	overflow: hidden;
+}
+
+.list-item {
+	border: 2px solid rgba(123, 124, 152, 0.289);
+	background: rgb(193, 29, 29);
+	margin-bottom: 10px;
+	padding: 10px;
+	box-shadow: 0px 0px 10px 0px rgb(45, 38, 38);
+}
+
+.list-item h4 {
+	color: #000;
+	font-size: 18px;
+	margin: 0 0 5px;	
+}
+
+.list-item p {
+	margin: 0;
+}
+
+.simple-pagination ul {
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+}
+
+.simple-pagination li {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.simple-pagination li a,
+.simple-pagination li span {
+	color: #666;
+	padding: 5px 10px;
+	text-decoration: none;
+	border: 1px solid #EEE;
+	background-color: #FFF;
+	box-shadow: 0px 0px 10px 0px rgb(196, 192, 192);
+}
+
+.simple-pagination .current {
+	color: #FFF;
+	background-color:#000;
+	border-color: #000;
+}
+
+.simple-pagination .prev.current,
+.simple-pagination .next.current {
+	background: #000;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
+ <section>
+      <div class="container mt-1">
+        <div class="row">
+            {{#each products}}
+          <div class="col-6 col-md-4 col-lg-3 p-4 hide-div list-wrapper">
+            <div class="card list-item" >
+              <div id="image">
+                <figure id="img-fig">
+              <a href="/product?id={{this._id}}"><img   id="img" src="/product-images/{{this._id}}.jpg" class="card-img-top"  style="width:13.5rem ; height:15rem"/></a>  
+               </figure>
+              </div>
+              
+              
+              <div class="card-body ">
+                
+                <h4 class="mt-2 card-title brand ">{{this.Name}}</h4>
+                
+                    <h4 class="card-title brand">{{this.category}}</h4>
+                    
+                     <button onclick="addToCart('{{this._id}}')" class="btn btn-dark float-end">Add to cart</button>
+                <h6 class="card-title mt-3 brand">RS:{{this.Price}}</h6>
+                {{!-- <button onclick="addToCart('{{this._id}}')" class="btn btn-dark">Add to cart</button> --}}
+              </div>
+            </div>
+          </div>
+          {{/each}}
+          
+          {{!-- <div id="pagination-container"></div> --}}
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .list-item {
+        background-color:rgb(190, 186, 209);
+      }
+      btn{
+        background-color: #37332fcc
+      }
+    </style>
+
+
+
+    {{!-- <script>
+  // jQuery Plugin: http://flaviusmatis.github.io/simplePagination.js/
+
+//pagination
+
+var items = $(".list-wrapper .list-item");
+    var numItems = items.length;
+    var perPage = 8;
+
+    items.slice(perPage).hide();
+
+    $('#pagination-container').pagination({
+        items: numItems,
+        itemsOnPage: perPage,
+        prevText: "&laquo;",
+        nextText: "&raquo;",
+        onPageClick: function (pageNumber) {
+            var showFrom = perPage * (pageNumber - 1);
+            var showTo = showFrom + perPage;
+            items.hide().slice(showFrom, showTo).show();
+        }
+    });
+</script> --}}

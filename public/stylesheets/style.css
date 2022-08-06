@@ -1,0 +1,24 @@
+.brand{
+    list-style: none;
+}
+
+th:focus,
+td:focus {
+  outline: -webkit-focus-ring-color auto 0;
+}
+table.dataTable tbody th,
+table.dataTable tbody td {
+  vertical-align: middle;
+}
+.carousel-item{
+  height: 24rem;
+
+}
+.add{
+  background:linear-gradient(rgb(8, 251, 211),rgba(137, 161, 165, 0.544));
+}
+a{
+ color:#000;
+ text-decoration: none;
+
+}

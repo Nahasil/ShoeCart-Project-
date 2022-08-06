@@ -1,0 +1,377 @@
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/side-style.css">
+
+
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3 ">
+                            <div>
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class=" pt-5">
+                                            <lottie-player
+                                                src="https://assets2.lottiefiles.com/packages/lf20_uxcmadsr.json"
+                                                background="transparent" speed="1" style="width: 300px; height: 300px;"
+                                                loop autoplay></lottie-player>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            <div class="col-md-8">
+                 <div class="row mt-2 py-3" style="background-color:rgb(248, 248, 248);max-width: 45rem;">
+                                <div class="col-5 ">
+                                    <h5><strong> Select address</strong></h5>
+                                </div>
+                                <div class="col-7 " style=" display: flex; justify-content: flex-end;">
+                                    <a href="/address" class="btn btn btn-outline-dark " style="width: fit-content; height: fit-content;">Add address</a>
+                                </div>
+                            </div>
+
+
+
+                   
+
+                   <div class=" row py-3 mr-0  "
+                                style="background-color: rgb(248, 248, 248);  max-width: 45rem;">
+                                <div class="coupon">
+                                    <p id="CouponMsg"></p>
+                                    <form id="ApplyCoupon" class="container-fluid w-100">
+                                        <div class=" container-fluid d-flex justify-content-between">
+                                            <div class="">
+                                                <input type="text" class=" text-center" name="coupon"
+                                                    style="padding: 7px ; box-sizing: border-box;border: 1px solid red; border-radius: 4px; width: 120px;"
+                                                    placeholder="Enter Code">
+                                            </div>
+
+                                            <div class="" style=" display: flex; justify-content: flex-end;"
+                                               >
+                                                <button type="submit" class="btn btn-outline-dark "
+                                                    style="width: fit-content; height: fit-content;">Apply Coupon</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+
+
+
+            
+
+            
+
+
+         
+            
+             
+                     
+
+              
+
+
+
+   
+        <form action="post" class="mb-5" id="checkout-form">
+            <input type="text" name="userId" id="" value="{{user._id}}" hidden>
+                    <h3 class="mt-2">DeLivery Details</h3><br>
+                    {{#each address}}
+                    <div class="">
+                  <div class="row d-flex justify-content-between"
+                                    style="background-color: rgb(248, 248, 248);  max-width: 45rem;">
+
+                                    <div class="col-12 text-end">
+                                        <a id="crossSignPlace" href="/edit-address/{{this._id}}"
+                                            style="text-decoration: none; color: rgb(107, 104, 104); font-size: large;">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a id="crossSignPlace" href="/delete-address/{{this._id}}"
+                                            style="margin-left: 10px; text-decoration: none; color: rgb(107, 104, 104); font-size: large;">&#10006;</a>
+                                    </div>
+
+                                    <div class="col-12 pl-sm-4 " style="margin-left: 10px;">
+
+                                        <input class=" form-check-input" type="radio" name="addressid"
+                                            id="flexRadioDefault1" value="{{this._id}}" checked>
+                                            
+                                        <h6 class="mt-3 text-truncate">{{this.name}}</h6>
+                                        <p>  {{this.address}} </p>
+                                        
+                                        <div class="d-flex">
+                                            <p class="">{{this.city}},</p>
+                                            <p class=" text-truncate">{{this.state}}</p>
+                                            {{!-- <p class="ms-4">{{this.zip}}</p> --}}
+                                        </div>
+                                        
+                                        <p class="">{{this.email}}</p>
+                                        <p class="">{{this.mobile}}</p>
+
+                                    </div>
+                                   
+
+
+
+                                </div>
+                                </div> 
+                    {{/each}}
+        </div>
+
+
+
+           
+                
+                <div class="col-md-5 mb-5">
+
+
+                    
+
+
+
+
+
+
+                    
+                   <div class="mt-5 ms-5 checkout">
+                       <h6  id="tootal">Total Amount : Rs.{{total}}</h6><br>
+
+                       <div class="total-payable" style="color: black;">
+                    <div class="payable-price">
+                       
+                        <p class="value"> discount percentage:</p>
+                        <p class="price" id="coupon">{{discount}}%</p>
+
+                    </div>
+                </div>
+
+
+
+                         <div class="total-Payable" style="color: black;">
+                    <div class="payable-price">
+                        <h6 class="value">Grand total:</h6>
+                        <h6 class="price" id="total">{{grandTotal}}</h6>
+
+                    </div>
+
+                </div>
+                   
+
+
+
+
+                       <hr>
+                       <div class="payment">
+                        <p>Payment Method</p>
+                        <label for="" class="radio-inline">
+                            <input type="radio" name="payment-method" value="COD" checked>COD
+                        </label>
+                         <label for="" class="radio-inline mt-2">
+                            <input type="radio" name="payment-method" value="Razorpay">Razor Pay
+                        </label>
+                        <label for="" class="radio-inline mt-2">
+                            <input type="radio" name="payment-method" value="Paypal">Pay Pal
+                        </label>
+                        <button class="btn btn-primary float-end" type="submit">Checkout</button>
+                       </div>
+                   </div>
+        </form>
+                </div>
+
+           <nav id="sidebar" class="d-none d-lg-block position-relative  mr-4 mt-3">
+        <div class="p-4 pt-5 sticky-top mt-5">
+            <div class="mb-5 sticky-top ">
+                <h4>ShoeCart</h4>
+
+                <h3>Hi,<span style="text-transform: capitalize;"> {{user.Name}}</span></h3>
+                <h5>please Enter your details </h5>
+            </div>
+        </div>
+    </nav>
+                    
+
+
+
+
+
+
+    </div>
+            
+            
+                
+    </div>
+</section>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>                
+<script>
+   
+
+
+   
+
+
+
+       
+
+ 
+     
+    $('#checkout-form').submit((e)=>{
+        e.preventDefault()
+   
+        $.ajax
+     ({
+            url:'/place-order',
+            method:'post',
+            data:$('#checkout-form').serialize(),
+            success:(response)=>
+            {
+                console.log('1234',response)
+                if(response.codSuccess){
+                    
+                        location.href='/order-success'
+                }
+                else if (response.paypal) {
+                    location.href = response.val
+                }
+           else{
+            razorPayment(response)
+           }
+            
+      
+            }
+        
+            
+     })
+       
+    
+ })
+
+
+
+
+   function razorPayment(order){
+    
+         var options = {
+    "key": "rzp_test_ezIbSE8Fg796E8", // Enter the Key ID generated from the Dashboard
+    "amount":order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "ShoeCart",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        verifyPayment(response,order)
+    },
+    "prefill": {
+        "name": "Nahasil V N",
+        "email": "mohammednahasilvn@gmail.com",
+        "contact": "7012502418"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+ rzp1.open();
+   }    
+
+
+function verifyPayment(payment,order){
+    $.ajax({
+        url:'/verify-payment',
+        method:'post',
+        data:{
+            payment,
+            order
+        },
+        success:(response)=>{
+            if(response.status==true){
+                location.href='/order-success'
+            }else{
+                alert('payment failed')
+            }
+        }
+        
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ $('#ApplyCoupon').submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/applyCoupon',
+            method: 'get',
+            data: $('#ApplyCoupon').serialize(),
+            success: (response) => {
+                console.log('qazxs',response)
+                if (response.CoupenUsed) {
+                    document.getElementById('CouponMsg').innerHTML = "Coupon Already Used"
+                }
+                else if (response.timeout) {
+                    document.getElementById('CouponMsg').innerHTML = "Coupon expired"
+                }
+                else if (response.Coupon) {
+                    let total = document.getElementById('tootal').innerHTML
+                    console.log(total);
+
+                    document.getElementById('CouponMsg').innerHTML = "Coupon Applied"
+                    document.getElementById("total").innerHTML = total - (response.CoupDiscount * total) / 100
+
+                    document.getElementById("coupon").innerHTML = response.CoupDiscount
+                    window.location.reload()
+                }
+                else if (response.NoCoupon) {
+                    document.getElementById('CouponMsg').innerHTML = "No Coupon Found"
+                }
+                else if (response.OneCouponUsed) {
+                    document.getElementById('CouponMsg').innerHTML = "Already One Coupon Used"
+                }
+
+            }
+        })
+    })
+
+
+
+
+
+
+</script>
+
+
+
+<style>
+ input[type=radio]{
+    width: 20px;
+    height: 20px;
+ }
+ label.radio-inline{
+    display: flex;
+    align-items: center;
+ }
+ .checkout{
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 30px;
+ }
+ .payment{
+    padding-bottom: 16px;
+ }
+</style>

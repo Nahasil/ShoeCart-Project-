@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="col-md-4 mt-4 m-auto add">
+        <div class="container mt-5 pl-5">
+            <h2 class="text-center">Signup</h2>
+            <form action="/signup" method="post" id="form">
+              {{#if signupErr}}
+            <p class="error" style="color:crimson;">{{signupErr}} </p>
+            {{/if}}
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="Name" id="Name"  placeholder="Enter Name">
+                     <span id="name" style="color: crimson;"></span>
+                </div>
+                <div class="form-group">
+                    <label for="">Email Adress</label>
+                    <input type="email" class="form-control" id="Email" name="Email" placeholder="Enter Email">
+                     <span id="email" style="color: crimson;"></span>
+                </div>
+                 <div class="form-group">
+                    <label for="">Phone Number</label>
+                    <input type="tel" class="form-control" id="Phone" name="Phone" placeholder="Enter Phone Number">
+                     <span id="phone" style="color: crimson;"></span>
+                </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control"id="Password" name="Password" placeholder="Enter Password">
+                     <span id="password" style="color: crimson;"></span>
+                </div>
+              
+                  <a href="/login" class="mt-2" >Already have a Account?</a>
+             
+                
+                <button type="submit" class="btn btn-dark float-end mb-3 mt-3 ">Signup</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+const form=document.getElementById('form')
+
+const Name=document.getElementById('Name')
+const Email=document.getElementById('Email')
+const Password=document.getElementById('Password')
+const Phone=document.getElementById('Phone')
+
+   const errname=document.getElementById('name')
+   const erremail=document.getElementById('email')
+   const errpassword=document.getElementById('password')
+   const errphone=document.getElementById('phone')
+ 
+ form.addEventListener('submit',(e)=>{
+    let message1=[]
+    let message2=[]
+    let message3=[]
+    let message4=[]
+    
+    if(Email.value===''||Email.value==null){
+            message1.push('Please enter the Email')
+        }else if(Email.value.indexOf('@')<=0){
+          message1.push('Invaild @ position')
+        }else if(Email.value.charAt(email.value.length-4)!='.'){
+          message1.push('format of email is incorrect')
+
+        }else if(Email.value.indexOf('@')==''){
+          message1.push('@ is missing')
+
+        }
+
+
+
+         if(Password.value===''||Password.value==null){
+            message2.push('Please enter the password')
+          }
+           else if(Password.value.length<4){
+            message2.push('password must be atleast 4 character or number')
+          }
+
+          if(Phone.value===''||Phone.value==null){
+            message4.push('Please enter the phone Number')
+          }
+           else if(Phone.value.length==10){
+            message4.push('phone number must be 10 numbers')
+          }
+           else if(isNaN(Phone.value)===true){
+            message4.push('Enter number only')
+          }
+
+
+
+          if(Name.value==''||Name.value==null){
+             message3.push('Please enter name')
+         }else if(isNaN(Name.value)==false){
+             message3.push("Enter characters only")
+         }
+
+
+
+          if(message1.length>0){
+           e.preventDefault();
+          erremail.innerText=message1.join('  ')
+          }
+
+
+          if(message2.length>0){
+            e.preventDefault()
+            errpassword.innerText=message2.join('  ')
+          }
+
+
+          if(message3.length>0){
+            e.preventDefault()
+            errname.innerText=message3.join('  ')
+          }
+
+           if(message4.length>0){
+            e.preventDefault()
+            errphone.innerText=message4.join('  ')
+          }
+
+ })
+
+</script>

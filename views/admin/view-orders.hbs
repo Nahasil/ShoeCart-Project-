@@ -1,0 +1,171 @@
+<section>
+  <div class="container-fluid p-2">
+
+    <table class="table mt-5" id="productTable">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th>Date</th>
+          <th scope="col">Users</th>
+          <th scope="col">Address</th>
+          <th>Payment Method</th>
+          <th>Amount</th>
+          <th scope="col">Status</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+
+        {{#each orders}}
+          <tr>
+            <th scope="row">{{inc @index}}</th>
+            <td>{{this.date}}</td>
+            <td>{{this.deliveryDetails.name}}</td>
+            <td>{{this.deliveryDetails.address}}, {{this.deliveryDetails.city}}, {{this.deliveryDetails.state}}</td>
+            <td>{{this.paymentMethod}}</td>
+            <td>{{this.totalAmount}}</td>
+            {{!-- <td>{{this.status}}</td> --}}
+
+            {{#if this.status}}
+              <td>
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {{this.status}}
+                  </button>
+                  <div class="dropdown-menu">
+                    <a
+                      style="color: rgb(5, 88, 94);"
+                      class="dropdown-item"
+                      href="/admin/status-change?status=proccessing&id={{this._id}}"
+                    >Proccessing</a>
+                    <a
+                      style="color: red;"
+                      class="dropdown-item"
+                      href="/admin/status-change?status=cancel&id={{this._id}}"
+                    >Cancel</a>
+                  </div>
+                </div>
+              </td>
+            {{/if}}
+
+            {{#if this.proccessingStatus}}
+            
+              <td>
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Proccessing
+                  </button>
+                  <div class="dropdown-menu">
+                    <a
+                      style="color: rgb(94, 43, 2);"
+                      class="dropdown-item"
+                      href="/admin/status-change?status=dispatched&id={{this._id}}"
+                    >Dispatched</a>
+
+                    <a
+                      style="color: red;"
+                      class="dropdown-item"
+                      href="/admin/status-change?status=cancel&id={{this._id}}"
+                    >Cancel</a>
+                  </div>
+                </div>
+              </td>
+            {{/if}}
+
+            {{#if this.dispatchedStatus}}
+              <td>
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    dispatched
+                  </button>
+                  <div class="dropdown-menu">
+                    <a
+                      style="color: green;"
+                      class="dropdown-item"
+                      href="/admin/status-change?status=delivered&id={{this._id}}"
+                    >Delivered</a>
+
+                    <a
+                      style="color: red;"
+                      class="dropdown-item"
+                      href="/admin/status-change?status=cancel&id={{this._id}}"
+                    >Cancel</a>
+                  </div>
+                </div>
+              </td>
+            {{/if}}
+            {{#if this.deliveryStatus}}
+              <td>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-success">
+                    Delivered
+                  </button>
+                </div>
+              </td>
+            {{/if}}
+            {{#if this.cancelStatus}}
+              <td>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-danger">
+                    Cancelled
+                  </button>
+                </div>
+              </td>
+            {{/if}}
+            {{#if this.returnStatus}}
+              <td>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-warning">
+                    Order Return
+                  </button>
+                </div>
+              </td>
+            {{/if}}
+
+            {{!-- <td>
+            <a href="/admin/cancel-orders?id={{this._id}}" class="btn btn-danger" onclick="return confirm('are you sure want to cancel this Order?')">cancel</a>
+          </td> 
+         --}}
+
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{{!-- {{#if this.status}}
+      <td class="success" > Active</td>
+      {{else}}
+      <td class="danger">Blocked</td>
+      {{/if}}
+       
+      <td>
+         {{#if this.status}}
+       
+       <a href="/admin/block-user?id={{this._id}}" class="btn btn-danger" onclick="blockUser(event)" name="{{this.Name}}">block</a>
+        {{else}}
+           <a href="/admin/unblock-user?id={{this._id}}" class="btn btn-primary" onclick="unBlockUser(event)" name="{{this.Name}}"> Unblock </a>
+         
+        {{/if}}
+
+
+ --}}

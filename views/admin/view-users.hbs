@@ -1,0 +1,47 @@
+<section>
+    <div class="container-fluid mt-3">
+        <table class="table mt-5" id="productTable">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+      {{#each user}}
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+      <td>{{this.Name}}</td>
+      <td>{{this.Email}}</td>
+      {{#if this.status}}
+      <td class="success" > Active</td>
+      {{else}}
+      <td class="danger">Blocked</td>
+      {{/if}}
+       
+      <td>
+         {{#if this.status}}
+       
+       <a href="/admin/block-user?id={{this._id}}" class="btn btn-danger" onclick="blockUser(event)" name="{{this.Name}}">block</a>
+        {{else}}
+           <a href="/admin/unblock-user?id={{this._id}}" class="btn btn-primary" onclick="unBlockUser(event)" name="{{this.Name}}"> Unblock </a>
+         
+        {{/if}}
+      </td> 
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>
+
+
+<script>
+  $(function(){
+    $('#productsTable').DataTable();
+  })
+</script>

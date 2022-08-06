@@ -1,0 +1,77 @@
+<section>
+    <div class="container-fluid p-2">
+        <div class="row mt-3">
+           
+        
+        <table class="table mt-5" id="productTable">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th>Name</th>
+      <th scope="col">Address</th>
+      
+      <th>Mobile</th>
+      <th scope="col">Amount</th>
+      <th>Payment</th>
+      <th>Status</th>
+      <th>Options</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+      {{#each orders}}
+    <tr>
+      <td scope="row">{{this.date}}</td>
+       <td>{{this.deliveryDetails.name}}</td>
+      <td>{{this.deliveryDetails.address}}</td>
+      
+      <td>{{this.deliveryDetails.mobile}}</td>
+      <td>{{this.totalAmount}}</td>
+      <td>{{this.paymentMethod}}</td>
+      {{#if this.status}}
+      <td>{{this.status}}</td>
+      <td>
+       <a href="/status-change?status=cancel&id={{this._id}}" class="btn btn-danger">Cancel</a>
+       </td>
+      {{/if}}
+      {{#if this.cancelStatus}}
+      <td>Cancel</td>
+      <td></td>
+      {{/if}}
+      {{#if this.deliveryStatus}}
+      <td>Deliverered</td>
+      <td>
+      <a href="/status-change?status=return&id={{this._id}}" class="btn btn-warning">Return </a>
+      </td>
+      {{/if}}
+      {{#if this.proccessingStatus}}
+      <td>Proccessing</td>
+      <td>
+       <a href="/status-change?status=cancel&id={{this._id}}" class="btn btn-danger">Cancel</a>
+       </td>
+      {{/if}}
+       {{#if this.dispatchedStatus}}
+      <td>Dispatched</td>
+      <td>
+       <a href="/status-change?status=cancel&id={{this._id}}" class="btn btn-danger">Cancel</a>
+       </td>
+      {{/if}}
+      {{#if this.returnStatus}}
+      <td>Order Returned</td>
+      <td></td>
+      {{/if}}
+
+
+        <td>
+        <a href="/view-order?id={{this._id}}" class="btn btn-dark">View products</a>
+       
+      </td>  
+      
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+    </div>
+</section>

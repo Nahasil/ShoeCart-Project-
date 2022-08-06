@@ -1,0 +1,88 @@
+<section>
+    <div class="container mt-4 ">
+    <div class="row " >
+        <div class="col-md-4 mx-auto pt-2 add">
+            <h2 class="text-center ">Add Catogory</h2>
+            <div class="form">
+              <div style="display: flex;" class="mx-auto">
+                <div>
+                <form action="/admin/add-category" method="POST" enctype="multipart/form-data">
+                  <label class="ms-3" for="">Category</label>
+                <input type="text" name="Category" class="form-control ms-3" id="Category">
+                 <span id="errcategory" style="color: crimson;"></span>
+                 </div>
+                 <div>
+              <button type="submit" class="btn btn-dark m-4 ">submit</button>
+              </div>
+            </form>
+            </div>
+            </div>    
+        </div>
+    </div>
+</div>
+    <div class="container-fluid m-auto">
+        <table class="table mt-5" id="productTable">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+   
+      <th scope="col">Category</th>
+      
+      <th></th>
+     
+    </tr>
+  </thead>
+  <tbody>
+
+      {{#each categories}}
+    <tr>
+      <td scope="row">{{inc @index}}</td>
+      <td>{{this.Category}}</td>
+     <td>
+     
+        <button class="btn btn-danger" onclick="deleteButton('/admin/delete-categories/{{this._id}}')">Delete</button>
+      </td> 
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>
+
+<script>
+  $(function(){
+    $('#productsTable').DataTable();
+  })
+</script>
+
+
+
+<script>
+
+  
+  
+  function deleteButton(value){
+  Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    {window.location=value}
+    
+  }
+})
+  }
+
+</script>
+
+
+<style>
+  .add{
+     background:linear-gradient(rgb(8, 251, 211),rgba(137, 161, 165, 0.544));
+  }
+</style>

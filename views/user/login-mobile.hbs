@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-5 m-auto mt-4 add">
+        <div class="container mt-5 pl-5">
+            <h2 class="text-center">Login</h2>
+            <form action="/otp-login" method="post">
+            
+                <div class="form-group">
+                    <label for="">Enter Mobile Number</label>
+                    <input type="number" class="form-control" id="number" name="Number" placeholder="Enter Mobile Number">
+                       {{#if NumberErr}}
+            <p class="error" style="color:crimson;">{{NumberErr}} </p>
+            {{/if}}
+                </div>
+
+
+                <button  type="submit" class="btn btn-primary float-end mt-3 mb-4" href="/otp-login">Submit</button>
+            
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+
+<div>
+
+<input type="text" value="{{this.users}}" id="user" hidden>
+<input type="text" value="{{this.products}}" id="products" hidden>
+<input type="text" value="{{this.orders}}" id="orders" hidden>
+<div style="background-color: rgb(200, 8, 8);">
+
+</div>
+
+
+<script>
+
+ let usersList=document.getElementById('user').value
+ let productList=document.getElementById('products').value
+ let orderList=document.getElementById('orders').value
+
+  let labels = [
+    'Users',
+    'Products',
+    'orders',
+    
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Chart Representation',
+      backgroundColor: [ 'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'],
+      borderColor: 'rgb(255, 99, 132)',
+      data: [usersList, productList, orderList],
+    }]
+  };
+
+  const config = {
+    type: 'pie',
+    data: data,
+    options: {}
+  };
+
+  
+</script>
+
+
+ <script>
+    
+  const myPie = new Chart(
+    document.getElementById('myPie'),
+    config
+  );
+
+//Bar chart
+
+  const config2= {
+    type: 'bar',
+    data: data,
+    options: {}
+  };
+
+
+ const myChart = new Chart(
+    document.getElementById('myChart'),
+    config2
+  );
+
+
+</script>
+
+
+
+
+
+

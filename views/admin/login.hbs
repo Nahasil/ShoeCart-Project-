@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-4 mt-4 m-auto add"  style="
+    background: linear-gradient(rgb(8, 251, 211),rgba(137, 161, 165, 0.544));">
+        <div class="container mt-5 pl-3">
+            <h2 class="text-center">Admin Login</h2>
+            <form action="/admin/adminLogin" method="post">
+            
+                <div class="form-group">
+                    <label for="">Email Adress</label>
+                    <input type="email" class="form-control" name="Email" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" name="Password" placeholder="Enter Password">
+                </div>
+                    {{#if adminErr}}
+            <p class="error" style="color:crimson;">{{adminErr}}</p>
+            {{/if}}
+                <button type="submit" class="btn btn-primary mt-3 mb-3 float-end" href="/adminLogin" >Login</button>
+            
+            </form>
+        </div>
+    </div>
+</div>
+
+
