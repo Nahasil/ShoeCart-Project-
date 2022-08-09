@@ -326,8 +326,17 @@ module.exports={
  getProductList:(userId)=>{
   return new Promise(async(resolve,reject)=>{
     let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:ObjectId(userId)})
-     console.log(cart);
+     console.log('cart:',cart);
+     if(cart!=null)
+     {
+     cartlength=cart.products
+     console.log('cart-length:',cartlength.length);
+     if(cartlength.length!=null||cartlength.length!=0){
     resolve(cart.products)
+     }
+    }else{
+      reject()
+    }
   })
  },
 
@@ -337,7 +346,6 @@ module.exports={
     let orders=await db.get().collection(collection.ORDER_COLLECTION)
     .find({userId:ObjectId(userId)}).sort({date:-1}).toArray()
     resolve(orders)
-    console.log('fdsafdsa',orders);
   })
  },
 
@@ -432,7 +440,6 @@ updateUser: (upUser) => {
         }
       }
     ]).toArray()
-    console.log('rerere',orderItems);
     resolve(orderItems)
   })
  },
@@ -499,11 +506,8 @@ updateUser: (upUser) => {
 
 
  getUserAddress: (addressid) => {
-  return new Promise(async (resolve, reject) => {
-    let address = await db
-      .get()
-      .collection(collection.ADDRESS_COLLECTION)
-      .findOne({ _id: ObjectId(addressid) });
+  return new Promise(async (resolve,reject) => {
+    let address = await db.get().collection(collection.ADDRESS_COLLECTION).findOne({ _id: ObjectId(addressid) });
     resolve(address);
   });
 },
@@ -512,8 +516,8 @@ updateUser: (upUser) => {
  placeOrder:(order,products,total,address)=>{
  let userId = order.userId;
   console.log('order:',order)
+  let  status=order['payment-method']==='COD'?'placed':'pending'
   return new Promise((resolve,reject)=>{
-   let  status=order['payment-method']==='COD'?'placed':'pending'
    let orderObj = {
     deliveryDetails: address,
     userId: ObjectId(userId),
@@ -521,19 +525,20 @@ updateUser: (upUser) => {
     products: products,
     totalAmount: total,
     status: status,
-    //date: new Date().toLocaleDateString(),
     date:new Date().toLocaleString(),
-    //            date:new Date(),
-
     cancel: false,
   };
+  console.log('staus:',status);
   
    db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
+    console.log('response: ',response);
+    if(status==='placed'){
     db.get().collection(collection.CART_COLLECTION).deleteOne({user:ObjectId(userId)
     })
-    
+   }
     resolve(response.insertedId)
    })
+  
   })
 },
 

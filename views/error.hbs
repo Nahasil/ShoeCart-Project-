@@ -2,12 +2,21 @@
 <h2>{{error.status}}</h2>
 <pre>{{error.stack}}</pre> --}}
 <script>
-  window.onload= function timeforredirect(){
+
+    console.log('user')
+     window.onload= function timeforredirect(){
    
     setTimeout(() => {
     window.location='/'
 }, 9000);
   }
+  
+ /* window.onload= function timeforredirect(){
+   
+    setTimeout(() => {
+    window.location='/'
+}, 9000);
+  }*/
 </script>
  <a href="" target="_blank">
   <header class="top-header">
@@ -42,7 +51,12 @@
        <p class="message__text" style="color: chartreuse;">With in 10 seconds It Automatically Redirect to the HOME PAGE</p>
       <p class="message__text" style="color: #E91E63;" >We're sorry, the page you were looking for isn't found here. The link you followed may either be broken or no longer exists. Please try again, or take a look at our.</p>
     </div>
+    {{#if admin}}
+     <a style="color: #03A9F4; font-size: medium" href="/admin">Go to Home Page</a>
+     {{else}}
      <a style="color: #03A9F4; font-size: medium" href="/">Go to Home Page</a>
+
+{{/if}}
     <div class="error__nav e-nav">
       <a href="/" target="blanck" class="e-nav_link"></a>
     </div>

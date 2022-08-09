@@ -27,19 +27,18 @@ const verifyAdminLogin=(req,res,next)=>{
 }
 
 /* GET  admin page. */
+
 router.get('/',verifyAdminLogin,async(req, res, next)=> {
   let admin=req.session.admin
 orders=await adminHelpers.orderCount()
 products=await adminHelpers.productCount()
 users=await adminHelpers.userCount()
+cash=await adminHelpers.cashPayment()
+razor=await adminHelpers.razorPayment()
+paypal=await adminHelpers.paypalPayment()
+console.log('hlo:',cash);
   
-res.render('admin/admin-page',{admin,
-  admin:true,
-  logAdmin:true,
-  users,
-  products,
-  orders
-})
+res.render('admin/admin-page',{admin,admin:true,logAdmin:true,users,products,orders,cash,razor,paypal})
   
   
   
@@ -59,9 +58,6 @@ let categories=await productHelpers.getAllCategories()
 })
 
 router.post('/add-product',(req,res)=>{
- console.log(req.body);
- console.log(req.files.image1);
-
 
   productHelpers.addProduct(req.body).then((id)=>{
     let image=req.files?.image1
@@ -78,8 +74,8 @@ router.post('/add-product',(req,res)=>{
   
 })
 const admin={
-  email:'admin@gmail.com',
-  password:'1234'
+  email:process.env.email,
+  password:process.env.password
 }
 router.get('/adminLogin',(req,res)=>{
   if(req.session.admin){

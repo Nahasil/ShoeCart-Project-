@@ -17,17 +17,20 @@ const  ObjectId  = require('mongodb').ObjectId
     addProduct:(product)=>{
        category=product.Category
         product.Price=parseInt(product.Price)
-        return new Promise(async(resolve,reject)=>{
+      async(resolve,reject)=>{
       let proCategory = await db.get().collection(collection.CATEGORY_COLLECTION).findOne({Category:category})
-    
+    if (proCategory===null){
       product.Category=proCategory._id
 
-     let result =await  db.get().collection(collection.PRODUCT_COLLECTION).insertOne(product)
-      console.log(result);
-          resolve(result.insertedId)
-        
+      let result =await  db.get().collection(collection.PRODUCT_COLLECTION).insertOne(product)
+       console.log(result);
+           resolve(result.insertedId)
+         
+ 
 
-      })
+    }
+  }
+    
     },
     getAllProduct:()=>{
       return new Promise(async(resolve,reject)=>{

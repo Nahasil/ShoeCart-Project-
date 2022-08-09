@@ -4,6 +4,10 @@
 <input type="text" value="{{this.users}}" id="user" hidden>
 <input type="text" value="{{this.products}}" id="products" hidden>
 <input type="text" value="{{this.orders}}" id="orders" hidden>
+<input type="text" value="{{this.cash}}" id="cash" hidden>
+<input type="text" value="{{this.razor}}" id="razor" hidden>
+<input type="text" value="{{this.paypal}}" id="paypal" hidden>
+
 <div style="background-color: rgb(200, 8, 8);">
 
 </div>
@@ -14,11 +18,15 @@
  let usersList=document.getElementById('user').value
  let productList=document.getElementById('products').value
  let orderList=document.getElementById('orders').value
+  let cashList=document.getElementById('cash').value
+ let razorList=document.getElementById('razor').value
+ let paypalList=document.getElementById('paypal').value
+
 
   let labels = [
-    'Users',
-    'Products',
-    'orders',
+    'Cash',
+    'Paypal',
+    'Razorpay',
     
   ];
 
@@ -30,7 +38,7 @@
       'rgb(54, 162, 235)',
       'rgb(255, 205, 86)'],
       borderColor: 'rgb(255, 99, 132)',
-      data: [usersList, productList, orderList],
+      data: [cashList, razorList, paypalList],
     }]
   };
 
@@ -52,10 +60,27 @@
   );
 
 //Bar chart
+let label = [
+    'User',
+    'Product',
+    'Order',
+    
+  ];
+  const data1 = {
+    labels: label,
+    datasets: [{
+      label: 'Chart Representation',
+      backgroundColor: [ 'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'],
+      borderColor: 'rgb(255, 99, 132)',
+      data: [usersList, productList, orderList],
+    }]
+  };
 
   const config2= {
     type: 'bar',
-    data: data,
+    data: data1,
     options: {}
   };
 

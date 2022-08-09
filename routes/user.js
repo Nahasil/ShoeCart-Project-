@@ -19,11 +19,6 @@ const paypal = require("paypal-rest-sdk");
 const { category } = require('../helpers/product.helpers');
 
 
-/*paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  client_id: 'ATQVBMuOkiqNLU0bVMSwcOzamYJGvFwFavcJd9r7p2Z3CWTLhbN3HgRXJUQET-56afU7YVLrsCctNHxM',
-  client_secret: 'EBy-8m7kdZSfhDfq_G3D2dIFT8Lkg5kE8uo4BipVN-Xnu4eQNDOAPS9skPyB2i3nvvELwbKOrzDlWxiK'
-});*/
 
 
 
@@ -275,9 +270,10 @@ router.get('/category',verifyLogin,async(req,res)=>{
 router.get('/cart',verifyLogin,async(req,res)=>{
  console.log(req.session.user._id); 
  let cartCount= await userHelpers.getCartCount(req.session.user._id)
- if(cartCount<=0){
+ if(cartCount<1){
   res.redirect('/')
  }else{
+  let cartCount= await userHelpers.getCartCount(req.session.user._id)
   let Category=await productHelpers.category()
   let products=await userHelpers.getCartproducts(req.session.user._id)
   let totalAmount=await userHelpers.getTotalAmount(req.session.user._id)
@@ -288,7 +284,6 @@ router.get('/cart',verifyLogin,async(req,res)=>{
 
 
 router.get('/add-to-cart/:id',(req,res)=>{
-  console.log('call ...');
 userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
   res.json({status:true})
   })
@@ -297,7 +292,6 @@ userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
 
 router.post('/change-product-quantity',(req,res,next)=>{
   userHelpers.changeProductQuantity(req.body).then(async(response)=>{
-    console.log("@#$@#$%##@",req.body.user);
     response.total=await userHelpers.getTotalAmount(req.body.user)
      res.json(response)
   })
@@ -385,7 +379,8 @@ router.post('/place-order',async(req,res)=>{
     paypal.payment.create(create_payment_json, function (error, payment) {
       if (error) {
         console.log(error)
-          throw error;
+        
+          res.render(error)
       } else {
           for(let i = 0;i < payment.links.length;i++){
             if(payment.links[i].rel === 'approval_url'){
@@ -408,6 +403,9 @@ router.post('/place-order',async(req,res)=>{
         res.render('error')
       })
      }
+  }).catch(()=>{
+    res.status(404)
+    res.render('error')
   })
   
 })
@@ -467,7 +465,6 @@ router.get('/orders',verifyLogin,async(req,res)=>{
   
 
   res.render('user/orders',{user:req.session.user,orders,cartCount,Category})
-  console.log(orders);
 })
 
 router.get("/status-change", (req, res) => {
