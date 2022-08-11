@@ -15,8 +15,8 @@ const db=require('./config/connection')
 const session=require('express-session')
 const crypto=require('crypto')
 
-const Grid=require('gridFs-Stream')
-const methodOverride=require('method-override')
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
