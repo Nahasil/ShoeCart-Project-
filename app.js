@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+require('dotenv').config({ path: '.env' })
 
 const Swal = require('sweetalert2')
 const userRouter = require('./routes/user');

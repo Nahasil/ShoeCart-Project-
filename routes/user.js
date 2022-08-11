@@ -6,7 +6,7 @@ const banerHelpers = require("../helpers/baner.helpers");
 const couponHelpers = require("../helpers/coupon.helpers")
 const offerHelpers=require('../helpers/offerHelpers')
 const categoryOfferHelpers=require('../helpers/category-offer-helpers')
-require('dotenv').config()
+
 
   
 const { response } = require('../app');
