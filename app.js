@@ -14,8 +14,7 @@ const fileUpload=require('express-fileupload')
 const db=require('./config/connection')
 const session=require('express-session')
 const crypto=require('crypto')
-const multer=require('multer')
-const GridFsStorage=require('multer-gridFs-Storage')
+
 const Grid=require('gridFs-Stream')
 const methodOverride=require('method-override')
 
