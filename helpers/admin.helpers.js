@@ -52,7 +52,7 @@ module.exports={
         }
        ]).toArray()
         console.log('Razor:',razor)
-        resolve(razor[0].total)
+        resolve(razor[0]?.total)
         }
       )
       
@@ -81,7 +81,7 @@ module.exports={
         }
        ]).toArray()
         console.log('Paypal:',paypal)
-        resolve(paypal[0].total)
+        resolve(paypal[0]?.total)
         }
       )
       
@@ -109,7 +109,7 @@ module.exports={
           }
         }
        ]).toArray()
-        console.log('cash:',cash[0].total)
+        
         resolve(cash[0]?.total)
         })
       
